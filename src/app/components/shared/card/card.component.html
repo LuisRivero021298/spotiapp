@@ -1,0 +1,24 @@
+<div class="card-columns m-5 animated fadeIn">
+  	<div class="card puntero" *ngFor="let item of items" >
+      <div *ngIf="item.artists; else contentArtist">
+       	<img [src]="item.images | noimage" class="card-img-top" [alt]="item.name">
+         <div class="card-body">
+         	<h5 class="card-title">{{item.name}}</h5>
+            <span class="date-item">{{item.release_date | date}}</span>
+            <p class="card-text">
+               <span class="badge badge-primary" *ngFor="let artist of item.artists">
+                  <a [routerLink]="['/artist', artist.id]"> {{artist.name}} </a>
+               </span>
+            </p>
+         </div>
+    	</div>
+      <ng-template #contentArtist>
+         <div (click)="viewArtist(item.id)">
+            <img [src]="item.images | noimage" class="card-img-top" [alt]="item.name">
+            <div class="card-body">
+               <h5 class="card-title">{{item.name}}</h5>
+            </div>
+         </div>
+      </ng-template>
+  	</div>
+</div>
